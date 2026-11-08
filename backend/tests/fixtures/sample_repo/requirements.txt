@@ -1,0 +1,4 @@
+fastapi>=0.110
+pyjwt==2.8.0
+# comment line
+sqlalchemy

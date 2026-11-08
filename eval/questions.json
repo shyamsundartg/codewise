@@ -1,0 +1,16 @@
+{
+  "repo": "https://github.com/pallets/itsdangerous",
+  "ref": "2.2.0",
+  "questions": [
+    {"q": "How does the Signer verify a signature?", "file": "src/itsdangerous/signer.py"},
+    {"q": "Where is the timestamp checked against max_age?", "file": "src/itsdangerous/timed.py"},
+    {"q": "How is data base64 encoded and decoded?", "file": "src/itsdangerous/encoding.py"},
+    {"q": "What exception is raised when a signed value is too old?", "file": "src/itsdangerous/exc.py"},
+    {"q": "How does the URL safe serializer compress the payload?", "file": "src/itsdangerous/url_safe.py"},
+    {"q": "How are multiple secret keys supported for key rotation?", "file": "src/itsdangerous/signer.py"},
+    {"q": "When loading, how does the serializer try each signer until one works?", "file": "src/itsdangerous/serializer.py"},
+    {"q": "Where is the HMAC digest computed?", "file": "src/itsdangerous/signer.py"},
+    {"q": "How is the signing key derived from the secret key and salt?", "file": "src/itsdangerous/signer.py"},
+    {"q": "Which JSON implementation is used by default and how is it made compact?", "file": "src/itsdangerous/_json.py"}
+  ]
+}

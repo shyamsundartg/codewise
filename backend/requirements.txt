@@ -1,0 +1,9 @@
+fastapi==0.162.2
+uvicorn==0.54.0
+python-multipart==0.0.32
+numpy==2.4.6
+rank-bm25==0.2.2
+# LLM / embedding providers (pick via LLM_PROVIDER / EMBEDDING_PROVIDER)
+openai==3.46.0
+anthropic==2.6.0
+fastembed==0.9.1

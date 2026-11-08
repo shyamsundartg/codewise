@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CodeWise</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/vendor/github-dark-dimmed.min.css" />
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand" id="home-link" title="Home">
+      <span class="logo">⌘</span><span>CodeWise</span>
+    </div>
+    <div class="repo-pill hidden" id="repo-pill"></div>
+    <div class="spacer"></div>
+    <button class="ghost hidden" id="new-repo-btn">+ Index another repo</button>
+  </header>
+
+  <!-- Landing: pick or ingest a repository -->
+  <main id="landing" class="landing">
+    <section class="hero">
+      <h1>Ask your codebase anything.</h1>
+      <p>Point CodeWise at a repository. It parses the code into functions and classes, finds endpoints and dependencies, and answers with links to the exact lines.</p>
+
+      <form id="github-form" class="ingest-row">
+        <input id="github-url" type="url" placeholder="https://github.com/owner/repo" required />
+        <button type="submit" class="primary">Index repo</button>
+      </form>
+
+      <label class="dropzone" id="dropzone">
+        <input type="file" id="zip-input" accept=".zip" hidden />
+        <span>or drop a <b>.zip</b> of your project here</span>
+      </label>
+
+      <div id="progress" class="progress hidden">
+        <ol class="steps">
+          <li data-step="fetching">Fetch</li>
+          <li data-step="indexing">Parse &amp; chunk</li>
+          <li data-step="embedding">Embed</li>
+          <li data-step="ready">Ready</li>
+        </ol>
+        <div id="progress-msg" class="muted"></div>
+      </div>
+    </section>
+
+    <section class="recent">
+      <h2>Indexed repositories</h2>
+      <ul id="repo-list" class="repo-list"><li class="muted">Nothing indexed yet.</li></ul>
+    </section>
+  </main>
+
+  <!-- Workspace: sidebar | chat | code viewer -->
+  <main id="workspace" class="workspace hidden">
+    <aside class="sidebar">
+      <nav class="tabs">
+        <button class="tab active" data-tab="files">Files</button>
+        <button class="tab" data-tab="endpoints">Endpoints <span id="ep-count" class="count"></span></button>
+        <button class="tab" data-tab="deps">Deps <span id="dep-count" class="count"></span></button>
+      </nav>
+      <div class="tab-panel" data-panel="files">
+        <input id="file-filter" class="filter" placeholder="Filter files…" />
+        <ul id="file-tree" class="file-tree"></ul>
+      </div>
+      <div class="tab-panel hidden" data-panel="endpoints"><ul id="endpoint-list" class="facts"></ul></div>
+      <div class="tab-panel hidden" data-panel="deps"><ul id="dep-list" class="facts"></ul></div>
+      <div id="lang-bar" class="lang-bar"></div>
+    </aside>
+
+    <section class="chat">
+      <div id="messages" class="messages">
+        <div id="empty-chat" class="empty-chat">
+          <h2>What do you want to know?</h2>
+          <div id="suggestions" class="suggestions"></div>
+        </div>
+      </div>
+      <form id="chat-form" class="composer">
+        <textarea id="question" rows="1" placeholder="Ask about the code… (Enter to send, Shift+Enter for a new line)"></textarea>
+        <button type="submit" class="primary" id="send-btn">Ask</button>
+      </form>
+    </section>
+
+    <section id="viewer" class="viewer collapsed">
+      <div class="viewer-head">
+        <span id="viewer-path" class="mono">No file open</span>
+        <button class="ghost icon" id="viewer-close" title="Close">✕</button>
+      </div>
+      <div id="viewer-body" class="viewer-body">
+        <p class="muted pad">Click a citation or a file to view the code.</p>
+      </div>
+    </section>
+  </main>
+
+  <template id="msg-template">
+    <article class="msg">
+      <div class="msg-role"></div>
+      <div class="msg-body markdown"></div>
+      <div class="msg-sources"></div>
+      <details class="msg-debug hidden">
+        <summary>How I found this</summary>
+        <div class="debug-body"></div>
+      </details>
+    </article>
+  </template>
+
+  <script src="/static/vendor/marked.min.js"></script>
+  <script src="/static/vendor/purify.min.js"></script>
+  <script src="/static/vendor/highlight.min.js"></script>
+  <script src="/static/app.js"></script>
+</body>
+</html>
