@@ -7,6 +7,10 @@ Every answer cites `file:line` and clicking a citation opens the exact lines.
 
 ![screenshot](docs/screenshot-answer.png)
 
+https://github.com/user-attachments/assets/cc7d4b67-8f33-4849-b70f-7d31c2c637de
+
+
+
 ---
 
 ## 1. Quick start
@@ -94,7 +98,7 @@ API: `POST /api/repos` (GitHub URL) · `POST /api/repos/upload` (zip) · `GET /a
 
 ---
 
-## 3. RAG / LLM approach and decisions ✍️
+## 3. RAG / LLM approach and decisions
 
 ### Chunking
 - Python code is cut into pieces by function and class, so each piece makes
@@ -167,7 +171,7 @@ Rank of the first chunk from the expected file (`-` = not in top 30):
 
 ---
 
-## 4. Key technical decisions ✍️
+## 4. Key technical decisions
 - **Not every question is a RAG question**: endpoints/dependencies come from static extraction.
 - **File-based vector store (NumPy) instead of a vector DB**: a repo is a few thousand chunks, brute-force cosine is ~1 ms. One container, nothing to operate. `RepoStore` is the seam for pgvector later.
 - **Python only for AST** (time box); other languages still indexed as text.
